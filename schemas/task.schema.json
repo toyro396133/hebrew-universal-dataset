@@ -39,7 +39,10 @@
         "followup",
         "deduction",
         "abstraction",
-        "entity_tracking"
+        "entity_tracking",
+        "planning",
+        "revision",
+        "self_check"
       ]
     },
     "question": {
@@ -71,6 +74,24 @@
           "content": {
             "type": "string"
           }
+        }
+      }
+    },
+    "difficulty": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reasoning_steps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "documents": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "entities": {
+          "type": "integer",
+          "minimum": 1
         }
       }
     }

@@ -22,3 +22,7 @@ jobs:
           python scripts/export.py --format chars --output /tmp/train-chars.jsonl
           python scripts/export.py --format bytes --output /tmp/train-bytes.jsonl
           python scripts/export.py --format messages --output /tmp/train-messages.jsonl
+      - name: Generate and validate a deterministic synthetic world
+        run: |
+          python scripts/generate_worlds.py --seed 17 --count-per-split 2 --entities 12 --steps 4 --documents 3 --generalization world --output-dir /tmp/hu-worlds
+          python scripts/validate.py --root /tmp/hu-worlds

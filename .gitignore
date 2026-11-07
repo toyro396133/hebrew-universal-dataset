@@ -5,3 +5,6 @@ __pycache__/
 exports/
 .DS_Store
 .pytest_cache/
+
+# Generated experiments (not curated source)
+generated/
