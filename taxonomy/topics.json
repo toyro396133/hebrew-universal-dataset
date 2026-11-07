@@ -1,0 +1,69 @@
+{
+  "version": "2.0.0",
+  "topics": [
+    {
+      "id": "language",
+      "label_he": "שפה ותקשורת"
+    },
+    {
+      "id": "objects",
+      "label_he": "עצמים וחומרים"
+    },
+    {
+      "id": "space",
+      "label_he": "מרחב וגאומטריה"
+    },
+    {
+      "id": "time",
+      "label_he": "זמן ותהליכים"
+    },
+    {
+      "id": "causality",
+      "label_he": "פעולות וסיבתיות"
+    },
+    {
+      "id": "logic_math",
+      "label_he": "מתמטיקה ולוגיקה"
+    },
+    {
+      "id": "nature",
+      "label_he": "טבע וסביבה"
+    },
+    {
+      "id": "engineering",
+      "label_he": "פיזיקה והנדסה"
+    },
+    {
+      "id": "computing",
+      "label_he": "מחשבים ואלגוריתמים"
+    },
+    {
+      "id": "economics",
+      "label_he": "כלכלה ומשאבים"
+    },
+    {
+      "id": "organizations",
+      "label_he": "ארגונים ומערכות"
+    },
+    {
+      "id": "geography",
+      "label_he": "גאוגרפיה"
+    },
+    {
+      "id": "history",
+      "label_he": "היסטוריה ותיעוד"
+    },
+    {
+      "id": "research",
+      "label_he": "מחקר וניסויים"
+    },
+    {
+      "id": "decision_making",
+      "label_he": "פתרון בעיות וקבלת החלטות"
+    },
+    {
+      "id": "synthetic_worlds",
+      "label_he": "עולמות מדומים"
+    }
+  ]
+}

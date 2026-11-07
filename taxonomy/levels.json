@@ -1,0 +1,89 @@
+{
+  "version": "2.0.0",
+  "levels": [
+    {
+      "level": 1,
+      "id": "basic-language",
+      "label_he": "שפה בסיסית",
+      "description_en": "recognize descriptions and attributes"
+    },
+    {
+      "level": 2,
+      "id": "relations-and-actions",
+      "label_he": "קשרים ופעולות",
+      "description_en": "locate relational and action facts"
+    },
+    {
+      "level": 3,
+      "id": "contextual-understanding",
+      "label_he": "הבנת הקשר",
+      "description_en": "coreference, dialogue and follow-up questions"
+    },
+    {
+      "level": 4,
+      "id": "multistep-deduction",
+      "label_he": "הסקה לוגית",
+      "description_en": "combine explicit premises"
+    },
+    {
+      "level": 5,
+      "id": "abstraction",
+      "label_he": "הפשטה והכללה",
+      "description_en": "recognize shared functions or principles"
+    },
+    {
+      "level": 6,
+      "id": "persistent-context",
+      "label_he": "הבנה מתמשכת",
+      "description_en": "track entities across documents"
+    },
+    {
+      "level": 7,
+      "id": "conflicting-evidence",
+      "label_he": "ידע חלקי וסותר",
+      "description_en": "resolve or abstain under uncertainty"
+    },
+    {
+      "level": 8,
+      "id": "causal-counterfactual",
+      "label_he": "סיבתיות ונגד-עובדות",
+      "description_en": "reason about causal interventions"
+    },
+    {
+      "level": 9,
+      "id": "rules-exceptions",
+      "label_he": "חוקים, חריגים וגבולות",
+      "description_en": "apply conditional rules and exceptions"
+    },
+    {
+      "level": 10,
+      "id": "recursive-abstraction",
+      "label_he": "הפשטה היררכית ורקורסיבית",
+      "description_en": "abstract over already learned abstractions"
+    },
+    {
+      "level": 11,
+      "id": "planning",
+      "label_he": "תכנון ופתרון בעיות",
+      "description_en": "find action plans satisfying constraints"
+    },
+    {
+      "level": 12,
+      "id": "analogical-transfer",
+      "label_he": "העברת ידע והיקש",
+      "description_en": "transfer principles to unfamiliar systems"
+    },
+    {
+      "level": 13,
+      "id": "evidence-revision",
+      "label_he": "למידה מתוך ראיות מתפתחות",
+      "description_en": "revise a hypothesis when evidence changes"
+    },
+    {
+      "level": 14,
+      "id": "metareasoning",
+      "label_he": "בקרה עצמית על הסקה",
+      "description_en": "verify inference and recognize insufficient evidence"
+    }
+  ]
+}

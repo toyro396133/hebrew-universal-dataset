@@ -28,7 +28,7 @@
     "level": {
       "type": "integer",
       "minimum": 1,
-      "maximum": 6
+      "maximum": 14
     },
     "categories": {
       "type": "array",
@@ -65,6 +65,222 @@
         },
         "reference": {
           "type": "string"
+        }
+      }
+    },
+    "topics": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "language",
+          "objects",
+          "space",
+          "time",
+          "causality",
+          "logic_math",
+          "nature",
+          "engineering",
+          "computing",
+          "economics",
+          "organizations",
+          "geography",
+          "history",
+          "research",
+          "decision_making",
+          "synthetic_worlds"
+        ]
+      }
+    },
+    "axis_tags": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "linguistic_structure": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "word",
+              "phrase",
+              "simple_sentence",
+              "complex_sentence",
+              "paragraph",
+              "document",
+              "dialogue"
+            ]
+          }
+        },
+        "morphology": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "inflection",
+              "prefix",
+              "suffix",
+              "spelling",
+              "niqqud",
+              "ambiguity"
+            ]
+          }
+        },
+        "relation_types": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "attribute",
+              "ownership",
+              "containment",
+              "location",
+              "order",
+              "comparison",
+              "identity",
+              "part_whole",
+              "cause",
+              "condition",
+              "temporal"
+            ]
+          }
+        },
+        "reasoning_pattern": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "direct",
+              "multi_hop",
+              "deduction",
+              "abduction",
+              "counterfactual",
+              "analogy",
+              "generalization",
+              "planning",
+              "proof_checking"
+            ]
+          }
+        },
+        "entity_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "world_complexity": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "objects": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "relations": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "events": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "states": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "temporal_memory": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "none",
+              "change",
+              "sequence",
+              "long_range",
+              "revision"
+            ]
+          }
+        },
+        "dialogue_structure": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "single_question",
+              "followup",
+              "multi_turn",
+              "correction",
+              "clarification"
+            ]
+          }
+        },
+        "evidence_status": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "explicit",
+              "implied",
+              "incomplete",
+              "contradictory",
+              "source_ranked"
+            ]
+          }
+        },
+        "abstraction_depth": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "novelty": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "seen",
+              "novel_entities",
+              "novel_combinations",
+              "novel_world",
+              "new_rule"
+            ]
+          }
+        },
+        "training_objectives": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "next_unit",
+              "retrieval",
+              "question_answering",
+              "reasoning",
+              "classification",
+              "planning",
+              "revision",
+              "self_check"
+            ]
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reasoning_steps": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "documents": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "entities": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "events": {
+          "type": "integer",
+          "minimum": 0
         }
       }
     }

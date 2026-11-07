@@ -1,0 +1,150 @@
+{
+  "version": "2.0.0",
+  "axes": [
+    {
+      "id": "linguistic_structure",
+      "label_he": "מבנה לשוני",
+      "type": "tags",
+      "values": [
+        "word",
+        "phrase",
+        "simple_sentence",
+        "complex_sentence",
+        "paragraph",
+        "document",
+        "dialogue"
+      ]
+    },
+    {
+      "id": "morphology",
+      "label_he": "מורפולוגיה",
+      "type": "tags",
+      "values": [
+        "inflection",
+        "prefix",
+        "suffix",
+        "spelling",
+        "niqqud",
+        "ambiguity"
+      ]
+    },
+    {
+      "id": "relation_types",
+      "label_he": "סוג קשר",
+      "type": "tags",
+      "values": [
+        "attribute",
+        "ownership",
+        "containment",
+        "location",
+        "order",
+        "comparison",
+        "identity",
+        "part_whole",
+        "cause",
+        "condition",
+        "temporal"
+      ]
+    },
+    {
+      "id": "reasoning_pattern",
+      "label_he": "מבנה הסקה",
+      "type": "tags",
+      "values": [
+        "direct",
+        "multi_hop",
+        "deduction",
+        "abduction",
+        "counterfactual",
+        "analogy",
+        "generalization",
+        "planning",
+        "proof_checking"
+      ]
+    },
+    {
+      "id": "entity_count",
+      "label_he": "כמות ישויות",
+      "type": "integer"
+    },
+    {
+      "id": "world_complexity",
+      "label_he": "מורכבות העולם",
+      "type": "counts",
+      "values": [
+        "objects",
+        "relations",
+        "events",
+        "states"
+      ]
+    },
+    {
+      "id": "temporal_memory",
+      "label_he": "זמן וזיכרון",
+      "type": "tags",
+      "values": [
+        "none",
+        "change",
+        "sequence",
+        "long_range",
+        "revision"
+      ]
+    },
+    {
+      "id": "dialogue_structure",
+      "label_he": "מבנה שיחה",
+      "type": "tags",
+      "values": [
+        "single_question",
+        "followup",
+        "multi_turn",
+        "correction",
+        "clarification"
+      ]
+    },
+    {
+      "id": "evidence_status",
+      "label_he": "ודאות ומקורות",
+      "type": "tags",
+      "values": [
+        "explicit",
+        "implied",
+        "incomplete",
+        "contradictory",
+        "source_ranked"
+      ]
+    },
+    {
+      "id": "abstraction_depth",
+      "label_he": "עומק הפשטה",
+      "type": "integer"
+    },
+    {
+      "id": "novelty",
+      "label_he": "סוג הכללה",
+      "type": "tags",
+      "values": [
+        "seen",
+        "novel_entities",
+        "novel_combinations",
+        "novel_world",
+        "new_rule"
+      ]
+    },
+    {
+      "id": "training_objectives",
+      "label_he": "יעדי אימון",
+      "type": "tags",
+      "values": [
+        "next_unit",
+        "retrieval",
+        "question_answering",
+        "reasoning",
+        "classification",
+        "planning",
+        "revision",
+        "self_check"
+      ]
+    }
+  ]
+}
