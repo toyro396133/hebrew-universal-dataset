@@ -53,7 +53,7 @@ class NaturalCorpusIngestionTests(unittest.TestCase):
 
     def test_filters(self):
         self.assertEqual("privacy_or_url", quality_rejection("הדוגמה כוללת קישור https://example.org ואין לשמור מידע שאינו נדרש."))
-        self.assertEqual("words", quality_rejection("משפט קצר"))
+        self.assertEqual("length", quality_rejection("משפט קצר"))
         self.assertEqual("language", quality_rejection("A very long example with English words and only שתי מילים עבריות."))
         self.assertEqual("טקסט לדוגמה", canonical("  טקסט \n לדוגמה  "))
 
