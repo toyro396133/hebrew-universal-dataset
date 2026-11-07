@@ -264,6 +264,7 @@ def main(argv=None):
     p.add_argument("--limit", type=int, default=200)
     p.add_argument("--scan-limit", type=int, default=1000)
     p.add_argument("--seed", type=int, default=17)
+    p.add_argument("--expected-revision", help="Fail closed if HF dataset snapshot SHA differs")
     p.add_argument("--start-offset", type=int, default=0)
     p.add_argument("--strategy", choices=["spread","start"], default="spread")
     p.add_argument("--output-dir", type=Path, required=True)
@@ -277,6 +278,8 @@ def main(argv=None):
             raise ValueError("scan-limit must be in 1..50000")
         if args.fetch:
             snapshot = hf_snapshot(cfg["dataset"])
+            if args.expected_revision and snapshot != args.expected_revision:
+                raise ValueError("HF dataset revision differs from pinned expected SHA")
             rows = hf_rows(cfg, args.scan_limit, args.seed, args.start_offset, args.strategy)
         else:
             snapshot = "offline-fixture"

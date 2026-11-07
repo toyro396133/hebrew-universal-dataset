@@ -26,6 +26,7 @@ jobs:
             --source hebrew_wikipedia_sentences \
             --fetch --strategy spread --seed 17 \
             --limit 2000 --scan-limit 5000 \
+            --expected-revision 76fe89e00b5cfac26b85af6b0a289590993c1753 \
             --output-dir /tmp/hu-wiki-staging
       - name: Audit sample against benchmark and provenance
         run: python scripts/audit_staging.py /tmp/hu-wiki-staging
