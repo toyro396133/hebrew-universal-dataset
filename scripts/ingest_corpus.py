@@ -172,7 +172,7 @@ def stage(config, rows, limit, root=ROOT, snapshot="fixture"):
         if len(grams) >= 2:
             for shingle in grams:
                 candidate_ids.update(shingle_index[shingle])
-        near_duplicate = any(len(grams & grams_seen[k]) / len(grams | grams_seen[k]) >= 0.90 for k in candidate_ids)
+        near_duplicate = any(len(grams & grams_seen[k]) / len(grams | grams_seen[k]) >= 0.75 for k in candidate_ids)
         if near_duplicate:
             stats["flag_near_duplicate"] += 1
         source_id = row.get(config.get("record_id_field", ""), idx)
