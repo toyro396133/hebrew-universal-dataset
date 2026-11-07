@@ -19,7 +19,7 @@ class ReviewCalibrationTests(unittest.TestCase):
         self.fixture = ROOT / "tests" / "fixtures" / "wiki-rows.jsonl"
 
     def staged(self, temporary):
-        docs, stats = stage(self.source, source_rows(self.fixture), 100)
+        docs, stats = stage(self.source, source_rows(self.fixture), 100, snapshot="offline-fixture")
         out = Path(temporary) / "stage"
         write_stage(out, docs, stats, self.source, "offline-fixture")
         return out
