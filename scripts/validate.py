@@ -58,7 +58,7 @@ def validate(docs, tasks):
         if did in seen: errors.append(f'{tag}: duplicate ID')
         seen[did] = doc
         if doc['language'] != 'he': errors.append(f'{tag}: language must be he')
-        if type(doc['level']) is not int or not 1 <= doc['level'] <= 14: errors.append(f'{tag}: level must be 1..14')
+        if type(doc['level']) is not int or not 0 <= doc['level'] <= 14: errors.append(f'{tag}: level must be 0..14 (0 = ungraded natural text)')
         if doc['split'] not in SPLITS: errors.append(f'{tag}: invalid split')
         cats = doc['categories']
         if not isinstance(cats, list) or not cats or not all(isinstance(x, str) and x for x in cats) or len(set(cats)) != len(cats):
@@ -101,6 +101,14 @@ def validate(docs, tasks):
         source = doc['source']
         if not isinstance(source, dict) or not all(isinstance(source.get(x), str) and source.get(x) for x in ('kind', 'license', 'reference')):
             errors.append(f'{tag}: missing source kind/license/reference')
+        if doc['level'] == 0 and doc['source'].get('kind') != 'external':
+            errors.append(f'{tag}: ungraded level 0 is reserved for natural external text')
+        if doc['source'].get('kind') == 'external':
+            p = doc.get('provenance')
+            if not isinstance(p, dict) or any(not p.get(k) for k in ('dataset','snapshot_revision','source_row_id','attribution','dataset_card')) or not isinstance(p.get('original_sha256'),str) or len(p['original_sha256']) != 64:
+                errors.append(f'{tag}: external text is missing full provenance')
+            if doc['split'] != 'train':
+                errors.append(f'{tag}: external unreviewed documents must remain in train only')
         group = doc['group_id']
         if not isinstance(group, str) or not group: errors.append(f'{tag}: invalid group_id')
         elif group in group_split and group_split[group] != doc['split']:

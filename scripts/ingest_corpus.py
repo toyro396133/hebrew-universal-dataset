@@ -161,6 +161,7 @@ def stage(config, rows, limit, root=ROOT, snapshot="fixture"):
     exact_eval, grams_eval = benchmark_signatures(root)
     accepted, stats = [], collections.Counter()
     exact_seen, seen_ids, grams_seen = set(), set(), []
+    shingle_index = collections.defaultdict(set)
     for idx, row in rows:
         stats["scanned"] += 1
         text = row.get(config["text_field"])
@@ -178,7 +179,11 @@ def stage(config, rows, limit, root=ROOT, snapshot="fixture"):
             continue
         # Near-duplicate guard within the batch, not a claim of global deduplication.
         grams = ngrams(text_nfc)
-        if len(grams) >= 2 and any(len(grams & other) / len(grams | other) >= 0.90 for other in grams_seen if other):
+        candidate_ids = set()
+        if len(grams) >= 2:
+            for shingle in grams:
+                candidate_ids.update(shingle_index[shingle])
+        if any(len(grams & grams_seen[k]) / len(grams | grams_seen[k]) >= 0.90 for k in candidate_ids):
             stats["reject_near_duplicate"] += 1
             continue
         source_id = row.get(config.get("record_id_field", ""), idx)
@@ -194,7 +199,10 @@ def stage(config, rows, limit, root=ROOT, snapshot="fixture"):
         seen_ids.add(record_id)
         exact_seen.add(fp)
         if grams:
+            pos = len(grams_seen)
             grams_seen.append(grams)
+            for shingle in grams:
+                shingle_index[shingle].add(pos)
         provenance = {
             "dataset": config["dataset"], "snapshot_revision": snapshot,
             "source_row_id": str(source_id), "row_index": idx,
@@ -263,6 +271,8 @@ def main(argv=None):
     args = p.parse_args(argv)
     try:
         cfg = source_by_id(args.source)
+        if cfg.get("status") != "approved_for_staging_only":
+            raise ValueError("This source is catalog-only; review required before any fetch")
         if not 1 <= args.scan_limit <= 50000:
             raise ValueError("scan-limit must be in 1..50000")
         if args.fetch:
