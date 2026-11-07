@@ -1,0 +1,23 @@
+{"id":"task-l01-train-01","source_ids":["he-l01-train-01"],"split":"train","kind":"fact","question":"מה צבע המחברת?","expected_answers":["ירוקה."]}
+{"id":"task-l01-validation-01","source_ids":["he-l01-validation-01"],"split":"validation","kind":"fact","question":"מה מצב החלון?","expected_answers":["פתוח."]}
+{"id":"task-l01-test-01","source_ids":["he-l01-test-01"],"split":"test","kind":"fact","question":"איזה שביל מתואר?","expected_answers":["ארוך."]}
+{"id":"task-l02-train-01","source_ids":["he-l02-train-01"],"split":"train","kind":"relation","question":"היכן נועה הניחה את המפתח?","expected_answers":["במגירה."]}
+{"id":"task-l02-validation-01","source_ids":["he-l02-validation-01"],"split":"validation","kind":"relation","question":"לאן הועבר הספל?","expected_answers":["למדף."]}
+{"id":"task-l02-test-01","source_ids":["he-l02-test-01"],"split":"test","kind":"relation","question":"מי קיבל את התיק?","expected_answers":["רון."]}
+{"id":"task-l03-train-01","source_ids":["he-l03-train-01"],"split":"train","kind":"qa","question":"היכן נמצאת המחברת בסיום התיאור?","expected_answers":["בתיק הכחול, שנמצא בארונית."]}
+{"id":"task-l03-validation-01","source_ids":["he-l03-validation-01"],"split":"validation","kind":"qa","question":"באיזו קופסה נמצאת המברשת?","expected_answers":["בקופסה הירוקה."]}
+{"id":"task-l03-test-01","source_ids":["he-l03-test-01"],"split":"test","kind":"qa","question":"איפה נמצאת המפה אחרי סגירת החלון?","expected_answers":["על השולחן."]}
+{"id":"task-l04-train-01","source_ids":["he-l04-train-01"],"split":"train","kind":"deduction","question":"האם התג של גיל מאפשר כניסה לאולם א?","expected_answers":["כן."]}
+{"id":"task-l04-validation-01","source_ids":["he-l04-validation-01"],"split":"validation","kind":"deduction","question":"האם המכשיר הכחול תקין?","expected_answers":["כן."]}
+{"id":"task-l04-test-01","source_ids":["he-l04-test-01"],"split":"test","kind":"deduction","question":"היכן נמצאת הקופסה של נועה?","expected_answers":["במחסן הצפוני."]}
+{"id":"task-l05-train-01","source_ids":["he-l05-train-01"],"split":"train","kind":"abstraction","question":"מה התפקיד המשותף לשלושת הלוחות?","expected_answers":["הצגת השעה."]}
+{"id":"task-l05-validation-01","source_ids":["he-l05-validation-01"],"split":"validation","kind":"abstraction","question":"מה הפעולה המשותפת לשלושת הכלים?","expected_answers":["העברת ארגזים."]}
+{"id":"task-l05-test-01","source_ids":["he-l05-test-01"],"split":"test","kind":"abstraction","question":"מה משותף לשני המכשירים?","expected_answers":["מדידת חום."]}
+{"id":"task-l06-train-01","source_ids":["he-l06-train-01","he-l06-train-02","he-l06-train-03"],"split":"train","kind":"entity_tracking","question":"היכן הגליל בסוף יום שלישי?","expected_answers":["בארגז הכחול שבמחסן."]}
+{"id":"task-l06-validation-01","source_ids":["he-l06-validation-01","he-l06-validation-02","he-l06-validation-03"],"split":"validation","kind":"entity_tracking","question":"היכן המפתח בסוף יום שלישי?","expected_answers":["בתוך הקופסה הירוקה שבארון."]}
+{"id":"task-l06-test-01","source_ids":["he-l06-test-01","he-l06-test-02","he-l06-test-03"],"split":"test","kind":"entity_tracking","question":"היכן המשקפת בסוף יום שלישי?","expected_answers":["בתיק האפור שבחדר הציוד."]}
+{"id":"task-l03-test-02","source_ids":["he-l03-test-01"],"split":"test","kind":"followup","question":"האם סגירת החלון שינתה את מקום המפה?","expected_answers":["לא. המפה נשארה על השולחן."],"history":[{"role":"user","content":"איפה רינה הניחה את המפה?"},{"role":"assistant","content":"על השולחן."}]}
+{"id":"task-l03-train-02","source_ids":["he-l03-train-01"],"split":"train","kind":"followup","question":"היכן התיק בסיום הסיפור?","expected_answers":["בארונית."],"history":[{"role":"user","content":"היכן גיל הכניס את המחברת?"},{"role":"assistant","content":"לתיק הכחול."}]}
+{"id":"task-l04-train-02","source_ids":["he-l04-train-01"],"split":"train","kind":"deduction","question":"האם התג של גיל רשום במחברת הכניסה?","expected_answers":["כן."]}
+{"id":"task-l04-validation-02","source_ids":["he-l04-validation-01"],"split":"validation","kind":"deduction","question":"האם המכשיר הכחול מועבר לתחנת האריזה?","expected_answers":["כן."]}
+{"id":"task-l04-test-02","source_ids":["he-l04-test-01"],"split":"test","kind":"deduction","question":"האם הקופסה של נועה נספרת בסוף השבוע?","expected_answers":["כן."]}

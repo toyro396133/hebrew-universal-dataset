@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Task v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "source_ids",
+    "split",
+    "kind",
+    "question",
+    "expected_answers"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "split": {
+      "enum": [
+        "train",
+        "validation",
+        "test"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "fact",
+        "relation",
+        "qa",
+        "followup",
+        "deduction",
+        "abstraction",
+        "entity_tracking"
+      ]
+    },
+    "question": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_answers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "role": {
+            "enum": [
+              "user",
+              "assistant"
+            ]
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
