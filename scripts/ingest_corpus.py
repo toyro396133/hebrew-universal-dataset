@@ -56,10 +56,10 @@ def quality_rejection(text):
     words = TOKEN.findall(text)
     if not 5 <= len(words) <= 70:
         return "words"
-    if hebrew_ratio(text) < 0.75:
-        return "language"
     if EMAIL.search(text) or PHONE.search(text) or URL.search(text):
         return "privacy_or_url"
+    if hebrew_ratio(text) < 0.75:
+        return "language"
     if re.search(r"(.)\1{8,}", text):
         return "noise"
     return None
