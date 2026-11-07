@@ -45,6 +45,13 @@ class QualityScoringTests(unittest.TestCase):
         self.assertIsNone(hard_rejection(text))
         self.assertIn("url_review", score_text(text)["review_flags"])
 
+    def test_missing_terminator_is_referred_to_review_not_rejected(self):
+        text = "הפריט נשמר בארון המרכזי במשך שלושה ימים"
+        self.assertIsNone(hard_rejection(text))
+        q = score_text(text)
+        self.assertEqual("priority_review", q["triage"])
+        self.assertIn("fragment_or_no_terminal_punctuation", q["review_flags"])
+
     def test_contact_details_still_blocked(self):
         self.assertEqual("contact_data", hard_rejection("אנא כתבו ל support@example.org בנוגע לשינוי בתיעוד."))
         self.assertEqual("contact_data", hard_rejection("אפשר להתקשר למוקד בטלפון 050-1234567 כדי לקבל מידע נוסף."))

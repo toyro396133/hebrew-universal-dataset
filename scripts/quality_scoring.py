@@ -98,7 +98,7 @@ def score_text(text):
         "complexity_hints": sorted(set(hints)),
         "triage": "priority_review" if any(x in flags for x in
                  ("mixed_script_review","url_review","low_surface_score",
-                  "replacement_character")) else "routine_review",
+                  "replacement_character","fragment_or_no_terminal_punctuation","long_text")) else "routine_review",
         "semantic_quality": None, "factuality": None,
         "human_verified": False
     }
