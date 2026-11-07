@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 from ingest_corpus import (ROOT, canonical, fingerprint, ngrams, quality_rejection,
                            benchmark_signatures, passes_benchmark_guard, source_by_id)
+from quality_scoring import score_text, SCORER_VERSION
 
 def audit(path, reference_root=ROOT):
     path = Path(path)
@@ -47,6 +48,17 @@ def audit(path, reference_root=ROOT):
         if quality_rejection(text):
             errors.append(f"{line_no}: quality or privacy filter violation")
             continue
+        q = d.get("quality")
+        expected_q = score_text(text)
+        if not isinstance(q, dict) or q.get("version") != SCORER_VERSION:
+            errors.append(f"{line_no}: quality score version or payload missing")
+        else:
+            if q.get("surface_score") != expected_q["surface_score"] or q.get("dimensions") != expected_q["dimensions"]:
+                errors.append(f"{line_no}: quality score was altered or is inconsistent")
+            if q.get("human_verified") is not False:
+                errors.append(f"{line_no}: automatic pipeline may not claim human verification")
+            if q.get("semantic_quality") is not None or q.get("factuality") is not None:
+                errors.append(f"{line_no}: automatic pipeline may not claim semantic verification")
         signature = fingerprint(text)
         if signature in seen_fp:
             errors.append(f"{line_no}: exact duplicate")
