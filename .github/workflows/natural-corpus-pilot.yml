@@ -25,7 +25,7 @@ jobs:
           python scripts/ingest_corpus.py \
             --source hebrew_wikipedia_sentences \
             --fetch --strategy spread --seed 17 \
-            --limit 200 --scan-limit 3000 \
+            --limit 2000 --scan-limit 5000 \
             --output-dir /tmp/hu-wiki-staging
       - name: Audit sample against benchmark and provenance
         run: python scripts/audit_staging.py /tmp/hu-wiki-staging
