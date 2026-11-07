@@ -356,6 +356,119 @@
         "reviewed",
         "synthetic"
       ]
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "surface_score",
+        "dimensions",
+        "signals",
+        "review_flags",
+        "complexity_hints",
+        "triage",
+        "semantic_quality",
+        "factuality",
+        "human_verified"
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "surface_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "dimensions": {
+          "type": "object",
+          "required": [
+            "script_proxy",
+            "form_proxy",
+            "lexical_variety_proxy",
+            "signal_proxy"
+          ],
+          "properties": {
+            "script_proxy": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "form_proxy": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "lexical_variety_proxy": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "signal_proxy": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
+        },
+        "signals": {
+          "type": "object",
+          "required": [
+            "characters",
+            "words",
+            "hebrew_letter_ratio",
+            "has_terminal_punctuation"
+          ],
+          "properties": {
+            "characters": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "words": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "hebrew_letter_ratio": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "has_terminal_punctuation": {
+              "type": "boolean"
+            }
+          }
+        },
+        "review_flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "complexity_hints": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "triage": {
+          "enum": [
+            "priority_review",
+            "routine_review"
+          ]
+        },
+        "semantic_quality": {
+          "type": "null"
+        },
+        "factuality": {
+          "type": "null"
+        },
+        "human_verified": {
+          "const": false
+        }
+      }
     }
   }
 }

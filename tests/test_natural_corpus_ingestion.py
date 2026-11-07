@@ -17,8 +17,8 @@ class NaturalCorpusIngestionTests(unittest.TestCase):
 
     def test_fixture_generates_staged_train_only(self):
         docs, stats = stage(self.source, source_rows(self.fixture), 25)
-        self.assertEqual(5, len(docs))
-        self.assertEqual(5, stats["accepted"])
+        self.assertEqual(7, len(docs))
+        self.assertEqual(7, stats["accepted"])
         self.assertTrue(all(d["split"] == "train" and d["level"] == 0 for d in docs))
         self.assertTrue(all(d["source"]["license"] == "CC-BY-SA-3.0" for d in docs))
         self.assertTrue(all(d["provenance"]["article_id"] for d in docs))
@@ -31,7 +31,7 @@ class NaturalCorpusIngestionTests(unittest.TestCase):
             result = audit(out)
             self.assertEqual("PASS_STAGING_ONLY", result["status"])
             self.assertFalse(result["publishable"])
-            self.assertEqual(5, result["distinct_groups"])
+            self.assertEqual(7, result["distinct_groups"])
 
     def test_staging_does_not_overwrite(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -52,9 +52,9 @@ class NaturalCorpusIngestionTests(unittest.TestCase):
         self.assertEqual(a, b)
 
     def test_filters(self):
-        self.assertEqual("privacy_or_url", quality_rejection("הדוגמה כוללת קישור https://example.org ואין לשמור מידע שאינו נדרש."))
-        self.assertEqual("length", quality_rejection("משפט קצר"))
-        self.assertEqual("language", quality_rejection("A very long example with English words and only שתי מילים עבריות."))
+        self.assertIsNone(quality_rejection("הדוגמה כוללת קישור https://example.org ואין לשמור מידע שאינו נדרש."))
+        self.assertIsNone(quality_rejection("משפט קצר"))
+        self.assertIsNone(quality_rejection("A very long example with English words and only שתי מילים עבריות."))
         self.assertEqual("טקסט לדוגמה", canonical("  טקסט \n לדוגמה  "))
 
     def test_validation_benchmark_guard(self):

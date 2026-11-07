@@ -16,6 +16,7 @@ import unicodedata
 from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
+from quality_scoring import hard_rejection, score_text, SCORER_VERSION
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "sources" / "registry.json"
@@ -48,21 +49,8 @@ def hebrew_ratio(text):
     latin = len(LATIN.findall(text))
     return he / max(1, he + latin)
 
-def quality_rejection(text):
-    if not isinstance(text, str) or not text.strip():
-        return "empty"
-    if len(text) < 30 or len(text) > 1200:
-        return "length"
-    words = TOKEN.findall(text)
-    if not 5 <= len(words) <= 70:
-        return "words"
-    if EMAIL.search(text) or PHONE.search(text) or URL.search(text):
-        return "privacy_or_url"
-    if hebrew_ratio(text) < 0.75:
-        return "language"
-    if re.search(r"(.)\1{8,}", text):
-        return "noise"
-    return None
+# Compatibility alias for callers of the original binary filter.
+quality_rejection = hard_rejection
 
 def benchmark_signatures(root):
     """Protect exact and high-overlap benchmarks across splits."""
@@ -161,6 +149,7 @@ def stage(config, rows, limit, root=ROOT, snapshot="fixture"):
     exact_eval, grams_eval = benchmark_signatures(root)
     accepted, stats = [], collections.Counter()
     exact_seen, seen_ids, grams_seen = set(), set(), []
+    all_scores = []
     shingle_index = collections.defaultdict(set)
     for idx, row in rows:
         stats["scanned"] += 1
@@ -183,9 +172,9 @@ def stage(config, rows, limit, root=ROOT, snapshot="fixture"):
         if len(grams) >= 2:
             for shingle in grams:
                 candidate_ids.update(shingle_index[shingle])
-        if any(len(grams & grams_seen[k]) / len(grams | grams_seen[k]) >= 0.90 for k in candidate_ids):
-            stats["reject_near_duplicate"] += 1
-            continue
+        near_duplicate = any(len(grams & grams_seen[k]) / len(grams | grams_seen[k]) >= 0.75 for k in candidate_ids)
+        if near_duplicate:
+            stats["flag_near_duplicate"] += 1
         source_id = row.get(config.get("record_id_field", ""), idx)
         group = row.get(config.get("group_field", ""), source_id)
         if not isinstance(source_id, (int, str)) or not isinstance(group, (int, str)):
@@ -215,7 +204,18 @@ def stage(config, rows, limit, root=ROOT, snapshot="fixture"):
         }
         if str(group).isdecimal() and config.get("source_url_template"):
             provenance["article_url"] = config["source_url_template"].format(article_id=group)
+        quality = score_text(text_nfc)
+        if near_duplicate:
+            quality["review_flags"] = sorted(set(quality["review_flags"] + ["near_duplicate"]))
+            quality["triage"] = "priority_review"
+        stats["triage_" + quality["triage"]] += 1
+        stats["surface_band_" + ("high" if quality["surface_score"] >= 80 else
+                                 "medium" if quality["surface_score"] >= 60 else "low")] += 1
+        for flag in quality["review_flags"]:
+            stats["flag_" + flag] += 1
+        all_scores.append(quality["surface_score"])
         accepted.append({
+            "quality":quality,
             "id":record_id, "language":"he", "text":text_nfc,
             "level":0, "categories":["natural-text", "ungraded"],
             "split":"train", "group_id":config["id"] + "-article-" + str(group),
@@ -227,6 +227,9 @@ def stage(config, rows, limit, root=ROOT, snapshot="fixture"):
         if len(accepted) >= limit:
             break
     stats["acceptance_rate"] = round(stats["accepted"] / max(1, stats["scanned"]), 4)
+    stats["mean_surface_proxy_score"] = round(sum(all_scores) / len(all_scores), 2) if all_scores else None
+    stats["scorer_version"] = SCORER_VERSION
+    stats["human_reviewed"] = 0
     return accepted, dict(stats)
 
 def write_stage(path, documents, stats, config, snapshot):

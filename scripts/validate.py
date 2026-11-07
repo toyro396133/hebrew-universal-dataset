@@ -109,6 +109,10 @@ def validate(docs, tasks):
                 errors.append(f'{tag}: external text is missing full provenance')
             if doc['split'] != 'train':
                 errors.append(f'{tag}: external unreviewed documents must remain in train only')
+        if doc.get('source', {}).get('kind') == 'external' and 'quality' in doc:
+            q = doc['quality']
+            if not isinstance(q, dict) or q.get('human_verified') is not False or q.get('semantic_quality', 'invalid') is not None or q.get('factuality', 'invalid') is not None or q.get('triage') not in ('priority_review', 'routine_review') or type(q.get('surface_score')) is not int or not 0 <= q['surface_score'] <= 100:
+                errors.append(f'{tag}: invalid or overstated automatic quality assessment')
         group = doc['group_id']
         if not isinstance(group, str) or not group: errors.append(f'{tag}: invalid group_id')
         elif group in group_split and group_split[group] != doc['split']:
