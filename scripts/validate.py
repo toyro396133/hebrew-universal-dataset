@@ -8,9 +8,19 @@ import unicodedata
 
 ROOT = Path(__file__).resolve().parents[1]
 SPLITS = {'train', 'validation', 'test'}
-KINDS = {'fact', 'relation', 'qa', 'followup', 'deduction', 'abstraction', 'entity_tracking'}
+KINDS = {'fact', 'relation', 'qa', 'followup', 'deduction', 'abstraction', 'entity_tracking', 'planning', 'revision', 'self_check'}
 REQUIRED_DOC = {'id', 'language', 'text', 'level', 'categories', 'split', 'group_id', 'source'}
 REQUIRED_TASK = {'id', 'source_ids', 'split', 'kind', 'question', 'expected_answers'}
+
+def _taxonomy(filename, key):
+    path = ROOT / 'taxonomy' / filename
+    data = json.loads(path.read_text(encoding='utf-8'))
+    return data[key]
+
+TOPIC_IDS = {t['id'] for t in _taxonomy('topics.json', 'topics')}
+_AXES = _taxonomy('axes.json', 'axes')
+AXIS_TYPES = {a['id']: a['type'] for a in _AXES}
+AXIS_VALUES = {a['id']: set(a.get('values', [])) for a in _AXES}
 
 def read_jsonl(path):
     for n, line in enumerate(path.read_text(encoding='utf-8-sig').splitlines(), 1):
@@ -48,7 +58,7 @@ def validate(docs, tasks):
         if did in seen: errors.append(f'{tag}: duplicate ID')
         seen[did] = doc
         if doc['language'] != 'he': errors.append(f'{tag}: language must be he')
-        if type(doc['level']) is not int or not 1 <= doc['level'] <= 6: errors.append(f'{tag}: level must be 1..6')
+        if type(doc['level']) is not int or not 1 <= doc['level'] <= 14: errors.append(f'{tag}: level must be 1..14')
         if doc['split'] not in SPLITS: errors.append(f'{tag}: invalid split')
         cats = doc['categories']
         if not isinstance(cats, list) or not cats or not all(isinstance(x, str) and x for x in cats) or len(set(cats)) != len(cats):
@@ -61,6 +71,33 @@ def validate(docs, tasks):
             fingerprint = ' '.join(value.split())
             if fingerprint in fingerprints: errors.append(f'{tag}: duplicate text of {fingerprints[fingerprint]}')
             fingerprints[fingerprint] = did
+        # Optional v2 annotations; v1 documents remain valid without these keys.
+        if 'topics' in doc:
+            labels = doc['topics']
+            if not isinstance(labels, list) or not labels or not all(isinstance(x, str) for x in labels) or len(set(labels)) != len(labels) or not set(labels) <= TOPIC_IDS:
+                errors.append(f'{tag}: unknown, duplicate or invalid topic labels')
+        if 'axis_tags' in doc:
+            labels = doc['axis_tags']
+            if not isinstance(labels, dict):
+                errors.append(f'{tag}: axis_tags must be an object')
+            else:
+                for axis, values in labels.items():
+                    if axis not in AXIS_TYPES:
+                        errors.append(f'{tag}: unknown axis {axis}')
+                        continue
+                    typ = AXIS_TYPES[axis]
+                    if typ == 'integer':
+                        if type(values) is not int or values < 0:
+                            errors.append(f'{tag}: axis {axis} needs a nonnegative integer')
+                    elif typ == 'counts':
+                        if not isinstance(values, dict) or not set(values) <= AXIS_VALUES[axis] or not all(type(x) is int and x >= 0 for x in values.values()):
+                            errors.append(f'{tag}: axis {axis} needs a map of nonnegative counts')
+                    elif not isinstance(values, list) or not values or not all(isinstance(x, str) for x in values) or len(set(values)) != len(values) or not set(values) <= AXIS_VALUES[axis]:
+                        errors.append(f'{tag}: invalid tags for axis {axis}')
+        if 'metrics' in doc:
+            metrics = doc['metrics']
+            if not isinstance(metrics, dict) or not set(metrics) <= {'reasoning_steps', 'documents', 'entities', 'events'} or not all(type(x) is int and x >= (1 if k in ('documents', 'entities') else 0) for k, x in metrics.items()):
+                errors.append(f'{tag}: invalid numeric complexity metrics')
         source = doc['source']
         if not isinstance(source, dict) or not all(isinstance(source.get(x), str) and source.get(x) for x in ('kind', 'license', 'reference')):
             errors.append(f'{tag}: missing source kind/license/reference')
@@ -92,6 +129,10 @@ def validate(docs, tasks):
         answers = task['expected_answers']
         if not isinstance(answers, list) or not answers or not all(isinstance(x, str) and x.strip() for x in answers):
             errors.append(f'{tag}: missing expected answers')
+        if 'difficulty' in task:
+            difficulty = task['difficulty']
+            if not isinstance(difficulty, dict) or not set(difficulty) <= {'reasoning_steps', 'documents', 'entities'} or not all(type(x) is int and x >= (0 if k == 'reasoning_steps' else 1) for k, x in difficulty.items()):
+                errors.append(f'{tag}: invalid task difficulty')
         history = task.get('history', [])
         if not isinstance(history, list) or len(history) % 2:
             errors.append(f'{tag}: history must have alternating user/assistant pairs')
