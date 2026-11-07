@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "hebrew_wikipedia_sentences",
+      "status": "approved_for_staging_only",
+      "dataset": "tomron87/hebrew-wikipedia-sentences-corpus",
+      "config": "default",
+      "upstream_split": "train",
+      "license": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "publisher": "Tom Ron; underlying text: Hebrew Wikipedia contributors",
+      "card_url": "https://huggingface.co/datasets/tomron87/hebrew-wikipedia-sentences-corpus",
+      "source_url_template": "https://he.wikipedia.org/?curid={article_id}",
+      "total_rows_reference": 10999257,
+      "text_field": "sentence",
+      "group_field": "article_id",
+      "record_id_field": "sentence_id",
+      "topic_strategy": "ungraded",
+      "attribution_required": true,
+      "sharealike_required": true,
+      "publication_review_required": true,
+      "notes": "Dataset card and upstream conditions must be checked before public redistribution. Stage samples locally with full provenance; do not mix with CC0 originals."
+    },
+    {
+      "id": "fineweb2_hebrew",
+      "status": "catalog_only",
+      "dataset": "HuggingFaceFW/fineweb-2",
+      "config": "heb_Hebr",
+      "upstream_split": "train",
+      "license": "ODC-BY-1.0",
+      "license_url": "https://opendatacommons.org/licenses/by/1-0/",
+      "publisher": "Hugging Face FineWeb2; underlying web sources retain applicable terms",
+      "card_url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-2",
+      "total_rows_reference": null,
+      "text_field": "text",
+      "topic_strategy": "ungraded",
+      "attribution_required": true,
+      "sharealike_required": false,
+      "publication_review_required": true,
+      "notes": "Common Crawl terms and underlying site rights require separate review; this source is deliberately disabled for ingestion in this prototype."
+    }
+  ]
+}

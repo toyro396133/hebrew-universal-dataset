@@ -1,0 +1,52 @@
+name: Natural Hebrew corpus pilot (staging only)
+on:
+  push:
+    branches:
+      - feat/hybrid-hebrew-corpus-pipeline-20261108
+    paths:
+      - scripts/ingest_corpus.py
+      - scripts/audit_staging.py
+      - sources/registry.json
+      - .github/workflows/natural-corpus-pilot.yml
+  workflow_dispatch:
+jobs:
+  stage-pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch deterministic bounded Hebrew sample
+        run: |
+          python scripts/ingest_corpus.py \
+            --source hebrew_wikipedia_sentences \
+            --fetch --strategy spread --seed 17 \
+            --limit 2000 --scan-limit 5000 \
+            --expected-revision 76fe89e00b5cfac26b85af6b0a289590993c1753 \
+            --output-dir /tmp/hu-wiki-staging
+      - name: Audit sample against benchmark and provenance
+        run: python scripts/audit_staging.py /tmp/hu-wiki-staging
+      - name: Publish non-content summary only
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('/tmp/hu-wiki-staging/report.json').read_text(encoding='utf-8'))
+          s=d['statistics']
+          with open(__import__('os').environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as f:
+              f.write('# Hebrew natural corpus sample — STAGING ONLY\n\n')
+              f.write(f"Accepted: **{s['accepted']}**, scanned: **{s['scanned']}**\n\n")
+              f.write(f"Snapshot: `{d['snapshot_revision']}`\n\n")
+              f.write('Raw corpus was not committed, uploaded or released.\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: natural-pilot-metadata-only
+          path: |
+            /tmp/hu-wiki-staging/report.json
+            /tmp/hu-wiki-staging/ATTRIBUTION.md
+          retention-days: 7

@@ -8,3 +8,6 @@ exports/
 
 # Generated experiments (not curated source)
 generated/
+
+# Natural-language source samples require curation and licensing review
+staging/

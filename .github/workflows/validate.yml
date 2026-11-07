@@ -26,3 +26,7 @@ jobs:
         run: |
           python scripts/generate_worlds.py --seed 17 --count-per-split 2 --entities 12 --steps 4 --documents 3 --generalization world --output-dir /tmp/hu-worlds
           python scripts/validate.py --root /tmp/hu-worlds
+      - name: Offline staging smoke test
+        run: |
+          python scripts/ingest_corpus.py --fixture tests/fixtures/wiki-rows.jsonl --limit 10 --output-dir /tmp/hu-stage-smoke
+          python scripts/audit_staging.py /tmp/hu-stage-smoke

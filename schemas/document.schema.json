@@ -27,7 +27,7 @@
     },
     "level": {
       "type": "integer",
-      "minimum": 1,
+      "minimum": 0,
       "maximum": 14
     },
     "categories": {
@@ -283,6 +283,79 @@
           "minimum": 0
         }
       }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataset",
+        "snapshot_revision",
+        "source_row_id",
+        "row_index",
+        "original_sha256",
+        "attribution",
+        "dataset_card"
+      ],
+      "properties": {
+        "dataset": {
+          "type": "string",
+          "minLength": 1
+        },
+        "snapshot_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_row_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "row_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "article_id": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "article_title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sentence_position": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "original_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "attribution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dataset_card": {
+          "type": "string",
+          "format": "uri"
+        },
+        "article_url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "curation_status": {
+      "enum": [
+        "raw_ungraded",
+        "reviewed",
+        "synthetic"
+      ]
     }
   }
 }
