@@ -13,15 +13,16 @@ class DatasetTests(unittest.TestCase):
     def test_data_valid(self):
         self.assertEqual([], validate(self.docs, self.tasks))
 
-    def test_all_six_levels_present(self):
-        self.assertEqual(set(range(1, 7)), {d['level'] for d in self.docs})
+    def test_all_fourteen_levels_present(self):
+        self.assertEqual(set(range(1, 15)), {d['level'] for d in self.docs})
 
     def test_splits_present(self):
         self.assertEqual({'train','validation','test'}, {d['split'] for d in self.docs})
 
     def test_leakage_detected(self):
         records = [dict(d) for d in self.docs]
-        records[-1]['split'] = 'train'
+        source = next(d for d in records if d['level'] == 6 and d['split'] == 'test')
+        source['split'] = 'train'
         self.assertTrue(any('appears in several splits' in e for e in validate(records, self.tasks)))
 
     def test_missing_document_reference_detected(self):
