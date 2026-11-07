@@ -4,10 +4,12 @@ on:
     branches:
       - feat/hybrid-hebrew-corpus-pipeline-20261108
       - feat/graded-curation-and-filtering-20261108
+      - feat/human-calibration-workflow-20261108
     paths:
       - scripts/ingest_corpus.py
       - scripts/audit_staging.py
       - scripts/quality_scoring.py
+      - scripts/review_calibration.py
       - sources/registry.json
       - .github/workflows/natural-corpus-pilot.yml
   workflow_dispatch:
@@ -32,6 +34,12 @@ jobs:
             --output-dir /tmp/hu-wiki-staging
       - name: Audit sample against benchmark and provenance
         run: python scripts/audit_staging.py /tmp/hu-wiki-staging
+      - name: Prepare representative blind review set in ephemeral storage
+        run: |
+          python scripts/review_calibration.py prepare \
+            --stage-dir /tmp/hu-wiki-staging \
+            --output-dir /tmp/hu-wiki-blind-review \
+            --seed 17 --count 120
       - name: Publish non-content summary only
         run: |
           python - <<'PY'
@@ -46,7 +54,11 @@ jobs:
               f.write(f"Surface-score mean (heuristic, uncalibrated): `{s.get('mean_surface_proxy_score')}`\n\n")
               f.write(f"Priority review: `{s.get('triage_priority_review',0)}`; routine review: `{s.get('triage_routine_review',0)}`\n\n")
               f.write(f"Short passages retained: `{s.get('flag_short_text',0)}`; mixed script flagged: `{s.get('flag_mixed_script_review',0)}`\n\n")
-              f.write('Raw corpus was not committed, uploaded or released.\n')
+              m=json.loads(Path('/tmp/hu-wiki-blind-review/internal-manifest.json').read_text(encoding='utf-8'))
+              f.write(f"Blind review candidates selected: `{m['selected']}` / `{m['requested']}`\n\n")
+              f.write(f"Sample strata (metadata only): `{json.dumps(m['stratum_counts'], ensure_ascii=False, sort_keys=True)}`\n\n")
+              f.write('NO human ratings were supplied and NO calibration was performed.\n\n')
+              f.write('Raw corpus and blind review packet were not uploaded, committed or released.\n')
           PY
       - uses: actions/upload-artifact@v4
         with:
