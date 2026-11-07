@@ -52,7 +52,7 @@ def generate(seed=7, count_per_split=2, entities=12, steps=4, documents=3, novel
                 all_docs.append({
                     'id': did,
                     'language': 'he',
-                    'text': ' '.join(chunk),
+                    'text': f'מסמך {j} בעולם {uid}: ' + ' '.join(chunk),
                     'level': 6,
                     'categories': ['long-context', 'entity-tracking', 'synthetic-stress'],
                     'topics': ['synthetic_worlds'],
