@@ -11,6 +11,7 @@ import json
 import math
 import statistics
 from pathlib import Path
+from audit_staging import audit
 
 RUBRIC = ("language_quality", "clarity", "context_independence", "training_usefulness")
 STRATA = ("short", "code_mixed", "long", "no_terminal", "priority_other", "routine")
@@ -83,9 +84,14 @@ def sample(documents, count, seed=17):
 
 def prepare(stage_dir, output_dir, count, seed):
     stage_dir, output_dir = Path(stage_dir), Path(output_dir)
+    if not (stage_dir / "report.json").is_file():
+        raise ValueError("Staging report missing")
     report = json.loads((stage_dir / "report.json").read_text(encoding="utf-8"))
     if report.get("status") != "STAGED_ONLY_NOT_APPROVED_FOR_PUBLICATION":
         raise ValueError("Stage is not explicitly staging-only")
+    checked = audit(stage_dir)
+    if checked["status"] != "PASS_STAGING_ONLY":
+        raise ValueError("Stage audit failed: " + "; ".join(checked["errors"][:3]))
     selected = sample(list(jsonl(stage_dir / "documents.jsonl")), count, seed)
     if not selected:
         raise ValueError("No review documents available")

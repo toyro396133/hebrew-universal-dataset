@@ -141,6 +141,18 @@ class ReviewCalibrationTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 prepare(Path(tmp)/"missing",Path(tmp)/"another",4,17)
 
+    def test_rejects_audit_failed_stage_before_exposing_text(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            st=self.staged(tmp)
+            meta=st/"report.json"
+            original=json.loads(meta.read_text(encoding="utf-8"))
+            original["license"]="UNLICENSED"
+            meta.write_text(json.dumps(original),encoding="utf-8")
+            out=Path(tmp)/"review"
+            with self.assertRaisesRegex(ValueError,"License mismatch"):
+                prepare(st,out,4,17)
+            self.assertFalse(out.exists())
+
     def test_holdout_group_stable(self):
         with tempfile.TemporaryDirectory() as tmp:
             st=self.staged(tmp)
