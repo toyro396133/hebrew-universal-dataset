@@ -12,6 +12,9 @@ import json
 import math
 import re
 import sys
+import time
+from http.client import RemoteDisconnected
+from urllib.error import URLError, HTTPError
 import unicodedata
 from pathlib import Path
 from urllib.parse import urlencode
@@ -90,16 +93,26 @@ def source_rows(path):
             except (ValueError, TypeError) as exc:
                 raise ValueError(f"{path}:{index}: {exc}") from exc
 
-def json_request(base, params=None, timeout=25):
+def json_request(base, params=None, timeout=45):
     if params:
         base += "?" + urlencode(params)
-    # All network requests are to fixed, known public hosts, never user-supplied URLs.
+    # Only known public upstream hosts; repeat immutable GET requests after transient failures.
     req = Request(base, headers={"User-Agent": "HebrewUniversalDataset/0.1 (research pilot)"})
-    with urlopen(req, timeout=timeout) as response:
-        body = response.read(5_000_001)
-        if len(body) > 5_000_000:
-            raise ValueError("Response size limit exceeded")
-        return json.loads(body)
+    for attempt in range(4):
+        try:
+            with urlopen(req, timeout=timeout) as response:
+                body = response.read(5_000_001)
+            if len(body) > 5_000_000:
+                raise ValueError("Response size limit exceeded")
+            return json.loads(body)
+        except HTTPError as exc:
+            if exc.code not in (429, 500, 502, 503, 504) or attempt == 3:
+                raise
+        except (URLError, TimeoutError, ConnectionError, RemoteDisconnected):
+            if attempt == 3:
+                raise
+        time.sleep(min(2 ** attempt, 8))
+    raise RuntimeError("Unreachable network retry state")
 
 def hf_snapshot(dataset):
     data = json_request("https://huggingface.co/api/datasets/" + dataset)

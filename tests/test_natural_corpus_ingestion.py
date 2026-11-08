@@ -84,5 +84,25 @@ class NaturalCorpusIngestionTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 audit(out)
 
+
+    def test_external_json_retries_timeout_then_succeeds(self):
+        import io
+        from unittest.mock import patch
+        from ingest_corpus import json_request
+        with patch("ingest_corpus.urlopen", side_effect=[TimeoutError("network timeout"), io.BytesIO(b'{"ok":true}')]) as mock_url:
+            with patch("ingest_corpus.time.sleep") as mock_sleep:
+                data = json_request("https://datasets-server.huggingface.co/rows")
+        self.assertTrue(data["ok"])
+        self.assertEqual(2, mock_url.call_count)
+        mock_sleep.assert_called_once()
+
+    def test_invalid_network_response_is_not_accepted_as_source(self):
+        import io
+        from unittest.mock import patch
+        from ingest_corpus import json_request
+        with patch("ingest_corpus.urlopen",return_value=io.BytesIO(b"not-json")):
+            with self.assertRaises(json.JSONDecodeError):
+                json_request("https://datasets-server.huggingface.co/rows")
+
 if __name__ == "__main__":
     unittest.main()
