@@ -1,0 +1,67 @@
+name: Encrypted AI review handoff
+on:
+  push:
+    branches:
+      - feat/encrypted-ai-review-handoff-20261108
+    paths:
+      - .github/workflows/encrypted-ai-review-handoff.yml
+      - scripts/encrypted_review_handoff.py
+  workflow_dispatch:
+jobs:
+  encrypted-handoff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install AES-GCM support
+        run: python -m pip install 'cryptography>=42,<48'
+      - name: Fetch original pinned Hebrew sentences into ephemeral staging
+        run: |
+          python scripts/ingest_corpus.py \
+            --source hebrew_wikipedia_sentences --fetch \
+            --strategy spread --seed 17 --limit 2000 \
+            --scan-limit 5000 \
+            --expected-revision 76fe89e00b5cfac26b85af6b0a289590993c1753 \
+            --output-dir /tmp/hu-secure-staging
+      - name: Audit external source, metadata and benchmark isolation
+        run: python scripts/audit_staging.py /tmp/hu-secure-staging
+      - name: Reconstruct EXACT 120-row blind-review sample
+        run: |
+          python scripts/review_calibration.py prepare \
+            --stage-dir /tmp/hu-secure-staging \
+            --output-dir /tmp/hu-blind-packet \
+            --seed 17 --count 120
+      - name: Encrypt sample with private repository secret (fail closed)
+        env:
+          REVIEW_PACKET_PASSPHRASE: ${{ secrets.REVIEW_PACKET_PASSPHRASE }}
+        run: |
+          python scripts/encrypted_review_handoff.py encrypt \
+            --review-dir /tmp/hu-blind-packet \
+            --output /tmp/ai-review-a-120.hureview
+      - name: Publish METADATA ONLY (no raw texts or passwords)
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          m=json.loads(Path('/tmp/hu-blind-packet/internal-manifest.json').read_text(encoding='utf-8'))
+          assert m['selected']==120 and m['source_snapshot']=='76fe89e00b5cfac26b85af6b0a289590993c1753'
+          with open(__import__('os').environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as f:
+              f.write('# AI Reviewer A: encrypted handoff produced\n\n')
+              f.write(f"Blinded documents: **{m['selected']}**\n\n")
+              f.write(f"Strata: {json.dumps(m['stratum_counts'],sort_keys=True)}\n\n")
+              f.write('Artifact is AES-GCM ENCRYPTED. It contains NO public plaintext.\n\n')
+              f.write('Only the user holding the private secret should decrypt and share the blind packet with the reviewer.\n\n')
+              f.write('No AI ratings have been generated or claimed.\n')
+          PY
+      - name: Upload encrypted ciphertext only
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-review-a-encrypted-packet
+          path: /tmp/ai-review-a-120.hureview
+          if-no-files-found: error
+          retention-days: 3
