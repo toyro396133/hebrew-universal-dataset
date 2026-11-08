@@ -6,6 +6,7 @@ on:
     paths:
       - .github/workflows/encrypted-ai-review-handoff.yml
       - scripts/encrypted_review_handoff.py
+      - scripts/ingest_corpus.py
   workflow_dispatch:
 jobs:
   encrypted-handoff:
