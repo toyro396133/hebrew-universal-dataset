@@ -1,0 +1,40 @@
+{"id":"cur26-task-c01-l03","source_ids":["cur26-c01-l03"],"split":"train","kind":"qa","question":"מי ביצעה את המדידה החוזרת?","expected_answers":["רות המודדת."]}
+{"id":"cur26-task-c01-l04","source_ids":["cur26-c01-l04"],"split":"train","kind":"deduction","question":"האם מותר להתחיל בזריעה לפי הנוהל?","expected_answers":["לא. הקרקע נמצאה יבשה."]}
+{"id":"cur26-task-c01-l06","source_ids":["cur26-c01-l06"],"split":"train","kind":"entity_tracking","question":"מה הועבר אל השביל ביום הרביעי?","expected_answers":["שלט העץ, לא הערוגה."]}
+{"id":"cur26-task-c01-l07","source_ids":["cur26-c01-l07"],"split":"train","kind":"revision","question":"האם ניתן לקבוע שהמשאבה השקתה ביום שלישי?","expected_answers":["לא. התיעוד סותר וקיימת אפשרות למקור מים אחר."]}
+{"id":"cur26-task-c01-l09","source_ids":["cur26-c01-l09"],"split":"train","kind":"deduction","question":"האם לצוות המדידה מותר לדרוך על אדמת הניסוי?","expected_answers":["לא. מותר לו לעבור רק בשביל."]}
+{"id":"cur26-task-c01-l11","source_ids":["cur26-c01-l11"],"split":"train","kind":"planning","question":"מה חייבים לשמור קבוע כדי להשוות את השפעת ההצללה?","expected_answers":["את כמות המים בשתי החלקות."]}
+{"id":"cur26-task-c01-l13","source_ids":["cur26-c01-l13"],"split":"train","kind":"revision","question":"איזה הסבר יחיד אינו מספיק עוד לצמיחה האיטית?","expected_answers":["מחסור במים לבדו."]}
+{"id":"cur26-task-c01-l14","source_ids":["cur26-c01-l14"],"split":"train","kind":"self_check","question":"האם שלוש ערוגות מוכיחות שהוספת מים עוזרת לכל הצמחים?","expected_answers":["לא. המדגם קטן ולא כל הגורמים בודדו."]}
+{"id":"cur26-task-c02-l03","source_ids":["cur26-c02-l03"],"split":"train","kind":"qa","question":"למה התייחסה המילה 'עדיין'?","expected_answers":["למועד השליחה."]}
+{"id":"cur26-task-c02-l04","source_ids":["cur26-c02-l04"],"split":"train","kind":"deduction","question":"האם הנוהל מחייב שההודעה ללא מספר אימות נרשמה?","expected_answers":["לא. הנוהל אינו קובע זאת."]}
+{"id":"cur26-task-c02-l06","source_ids":["cur26-c02-l06"],"split":"train","kind":"entity_tracking","question":"איזה עותק צולם ביום חמישי?","expected_answers":["הגרסה שתוקנה ביום שלישי."]}
+{"id":"cur26-task-c02-l07","source_ids":["cur26-c02-l07"],"split":"train","kind":"qa","question":"האם אפשר להכריע מה הייתה משמעות המילה בהקלטה?","expected_answers":["לא. חסר ההקשר שקדם לה."]}
+{"id":"cur26-task-c02-l09","source_ids":["cur26-c02-l09"],"split":"train","kind":"deduction","question":"כיצד מסמנים אות שאינה ברורה?","expected_answers":["בסימן המציין מקום חסר."]}
+{"id":"cur26-task-c02-l11","source_ids":["cur26-c02-l11"],"split":"train","kind":"planning","question":"מה בא אחרי שידור הרצף פעמיים?","expected_answers":["השוואת הקליטות."]}
+{"id":"cur26-task-c02-l13","source_ids":["cur26-c02-l13"],"split":"train","kind":"revision","question":"מה נמצא שסתר את ההשערה שכל השגיאות נגרמות בשידור?","expected_answers":["אות אחת הוקלדה בטעות עוד לפני השידור."]}
+{"id":"cur26-task-c02-l14","source_ids":["cur26-c02-l14"],"split":"train","kind":"self_check","question":"מה אי אפשר להסיק מארבע הצלחות מתוך חמש?","expected_answers":["שהמכשיר מדויק תמיד."]}
+{"id":"cur26-task-c03-l03","source_ids":["cur26-c03-l03"],"split":"train","kind":"entity_tracking","question":"איזו טורבינת 'רוח א' נסגרה?","expected_answers":["הטורבינה הישנה."]}
+{"id":"cur26-task-c03-l04","source_ids":["cur26-c03-l04"],"split":"train","kind":"deduction","question":"האם הנוהל מאפשר להמשיך בסיבוב ללא בדיקה לאחר חריגה?","expected_answers":["לא."]}
+{"id":"cur26-task-c03-l06","source_ids":["cur26-c03-l06"],"split":"train","kind":"entity_tracking","question":"מתי הוחזר הבלם למגדל הצפון?","expected_answers":["ביום חמישי."]}
+{"id":"cur26-task-c03-l07","source_ids":["cur26-c03-l07"],"split":"train","kind":"qa","question":"האם ידוע מי עצר את הטורבינה?","expected_answers":["לא. המקורות אינם מכריעים בין עצירה אוטומטית לידנית."]}
+{"id":"cur26-task-c03-l09","source_ids":["cur26-c03-l09"],"split":"train","kind":"deduction","question":"האם תיקון מכשיר הכיול פוטר מכל בדיקות הבטיחות?","expected_answers":["לא. רק מבדיקת הנתון באותו מכשיר."]}
+{"id":"cur26-task-c03-l11","source_ids":["cur26-c03-l11"],"split":"train","kind":"planning","question":"מה מבצעים מיד לפני חיבור הגנרטור?","expected_answers":["סיבוב קצר ללא עומס, ובדיקת המדדים."]}
+{"id":"cur26-task-c03-l13","source_ids":["cur26-c03-l13"],"split":"train","kind":"revision","question":"מהו גורם נוסף שנמצא לרעש החריג?","expected_answers":["בורג רופף."]}
+{"id":"cur26-task-c03-l14","source_ids":["cur26-c03-l14"],"split":"train","kind":"self_check","question":"האם פעולה תקינה ברוח חלשה מוכיחה בטיחות בסערה?","expected_answers":["לא."]}
+{"id":"cur26-task-c04-l03","source_ids":["cur26-c04-l03"],"split":"train","kind":"entity_tracking","question":"איזה אורי החליף את הכבל?","expected_answers":["אורי הטכנאי."]}
+{"id":"cur26-task-c04-l04","source_ids":["cur26-c04-l04"],"split":"train","kind":"deduction","question":"מדוע המתין הטכנאי לפני שינוי התאורה?","expected_answers":["לא התקבל אישור ממנהל הבמה."]}
+{"id":"cur26-task-c04-l06","source_ids":["cur26-c04-l06"],"split":"train","kind":"entity_tracking","question":"איזה סימון החליף את הכתום?","expected_answers":["פס לבן."]}
+{"id":"cur26-task-c04-l07","source_ids":["cur26-c04-l07"],"split":"train","kind":"qa","question":"האם ידוע מי כיבה את המפסק?","expected_answers":["לא."]}
+{"id":"cur26-task-c04-l09","source_ids":["cur26-c04-l09"],"split":"train","kind":"deduction","question":"האם עמדת המתח הנמוך מחליפה את הלוח הראשי?","expected_answers":["לא."]}
+{"id":"cur26-task-c04-l11","source_ids":["cur26-c04-l11"],"split":"train","kind":"planning","question":"מה יש לבדוק לפני שמחליפים פנס?","expected_answers":["את מקור החשמל ואת הכבל."]}
+{"id":"cur26-task-c04-l13","source_ids":["cur26-c04-l13"],"split":"train","kind":"revision","question":"איזו הבחנה התווספה לגבי הבהובים?","expected_answers":["בין הבהוב מתוכנן לבין תקלה."]}
+{"id":"cur26-task-c04-l14","source_ids":["cur26-c04-l14"],"split":"train","kind":"self_check","question":"האם תיקון הבהוב יחיד מוכיח שכל המעגלים תקינים?","expected_answers":["לא."]}
+{"id":"cur26-task-c05-l03","source_ids":["cur26-c05-l03"],"split":"train","kind":"entity_tracking","question":"איזה משלוח 'דרום' זוהה בתעודה?","expected_answers":["המשלוח למרכז התצוגה בדרום העיר."]}
+{"id":"cur26-task-c05-l04","source_ids":["cur26-c05-l04"],"split":"train","kind":"deduction","question":"מה יש לעשות בארגז השלישי לפי הנוהל?","expected_answers":["לשלוח אותו לבידוד."]}
+{"id":"cur26-task-c05-l06","source_ids":["cur26-c05-l06"],"split":"train","kind":"entity_tracking","question":"האם ידוע שהפריטים נמסרו ללקוח ביום רביעי?","expected_answers":["לא. נודע רק שהמדבקה הוסרה."]}
+{"id":"cur26-task-c05-l07","source_ids":["cur26-c05-l07"],"split":"train","kind":"qa","question":"האם אפשר לייחס בוודאות את החריגה לנסיעה הנבדקת?","expected_answers":["לא. שעון החיישן הוסט."]}
+{"id":"cur26-task-c05-l09","source_ids":["cur26-c05-l09"],"split":"train","kind":"deduction","question":"האם אריזת הדגמה ריקה נספרת כסחורה?","expected_answers":["לא."]}
+{"id":"cur26-task-c05-l11","source_ids":["cur26-c05-l11"],"split":"train","kind":"planning","question":"איזו פעולה קודמת לחתימת המקבל?","expected_answers":["אימות המוצרים מול תעודת המטען."]}
+{"id":"cur26-task-c05-l13","source_ids":["cur26-c05-l13"],"split":"train","kind":"revision","question":"מהו גורם חדש שנמצא לחריגות קירור?","expected_answers":["תקלה במאוורר."]}
+{"id":"cur26-task-c05-l14","source_ids":["cur26-c05-l14"],"split":"train","kind":"self_check","question":"האם ניתן לגזור שיעור תקלות עתידי מן הניסוח 'רוב המשלוחים'?","expected_answers":["לא, חסרים נתונים כמותיים ותנאי מדידה."]}
