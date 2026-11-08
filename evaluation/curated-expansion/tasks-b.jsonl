@@ -1,0 +1,40 @@
+{"id":"cur26-task-c06-l03","source_ids":["cur26-c06-l03"],"split":"train","kind":"qa","question":"האם ידוע איזה שרטוט תמר אמורה לתקן בלי מספר גרסה?","expected_answers":["לא."]}
+{"id":"cur26-task-c06-l04","source_ids":["cur26-c06-l04"],"split":"train","kind":"deduction","question":"האם מותר להתחיל במבחן עומס כשבורג רופף?","expected_answers":["לא."]}
+{"id":"cur26-task-c06-l06","source_ids":["cur26-c06-l06"],"split":"train","kind":"entity_tracking","question":"מה נשאר במקום ביום הרביעי לאחר הסרת הקורה?","expected_answers":["התומך."]}
+{"id":"cur26-task-c06-l07","source_ids":["cur26-c06-l07"],"split":"train","kind":"qa","question":"האם ניתן להסיק בוודאות שהקורה התעקמה?","expected_answers":["לא. שתי מדידות אינן תואמות."]}
+{"id":"cur26-task-c06-l09","source_ids":["cur26-c06-l09"],"split":"train","kind":"deduction","question":"באיזה תנאי מספיק תומך אחד בדגם?","expected_answers":["כאשר הדגם מיועד להצגת צורה בלבד ולא מופעל עליו עומס בדיקה."]}
+{"id":"cur26-task-c06-l11","source_ids":["cur26-c06-l11"],"split":"train","kind":"planning","question":"מה יש לבצע לפני הנחת המשקל?","expected_answers":["לקבוע מפתח, למדוד את עובי העץ ולהשוות לשרטוט."]}
+{"id":"cur26-task-c06-l13","source_ids":["cur26-c06-l13"],"split":"train","kind":"revision","question":"איזו השערה נחלשה בעקבות מבחן הלחות?","expected_answers":["שהדבק החדש תמיד עמיד יותר."]}
+{"id":"cur26-task-c06-l14","source_ids":["cur26-c06-l14"],"split":"train","kind":"self_check","question":"האם מבחן יחיד בטמפרטורת החדר מוכיח עמידות חיצונית לשנים?","expected_answers":["לא."]}
+{"id":"cur26-task-c07-l03","source_ids":["cur26-c07-l03"],"split":"validation","kind":"entity_tracking","question":"לאיזה מכל מספר 12 מתייחס רישום התקלה?","expected_answers":["למכל החלופי."]}
+{"id":"cur26-task-c07-l04","source_ids":["cur26-c07-l04"],"split":"validation","kind":"deduction","question":"האם מותר להתחיל בייבוש כאשר חיישן המכסה מציג פתוח?","expected_answers":["לא."]}
+{"id":"cur26-task-c07-l06","source_ids":["cur26-c07-l06"],"split":"validation","kind":"entity_tracking","question":"היכן הונח גליל 18 ביום שלישי?","expected_answers":["במחסן המוגמרים."]}
+{"id":"cur26-task-c07-l07","source_ids":["cur26-c07-l07"],"split":"validation","kind":"qa","question":"האם נקבע שהדף חריג בעוביו?","expected_answers":["לא. המדידות אינן מכריעות."]}
+{"id":"cur26-task-c07-l09","source_ids":["cur26-c07-l09"],"split":"validation","kind":"deduction","question":"האם דף מדידה שנגזר נשלח מיד למחזור?","expected_answers":["לא. הוא נשמר כדגימה עד סיום הבדיקה."]}
+{"id":"cur26-task-c07-l11","source_ids":["cur26-c07-l11"],"split":"validation","kind":"planning","question":"מה בא לאחר כיוון מהירות המסוע ולפני חידוש ייצור מסחרי?","expected_answers":["ייצור דף בדיקה."]}
+{"id":"cur26-task-c07-l13","source_ids":["cur26-c07-l13"],"split":"validation","kind":"revision","question":"מהו הגורם הנוסף שנמצא לקרעים?","expected_answers":["חלקיק קשיח בעיסה."]}
+{"id":"cur26-task-c07-l14","source_ids":["cur26-c07-l14"],"split":"validation","kind":"self_check","question":"האם שלושה צילומים מוכיחים תקינות רציפה?","expected_answers":["לא."]}
+{"id":"cur26-task-c08-l03","source_ids":["cur26-c08-l03"],"split":"validation","kind":"entity_tracking","question":"איזו 'גבעה קטנה' היא מקור הדגימה?","expected_answers":["הנקודה המזרחית."]}
+{"id":"cur26-task-c08-l04","source_ids":["cur26-c08-l04"],"split":"validation","kind":"deduction","question":"האם צבע דומה מספיק לקביעת גיל שכבות זהה?","expected_answers":["לא."]}
+{"id":"cur26-task-c08-l06","source_ids":["cur26-c08-l06"],"split":"validation","kind":"entity_tracking","question":"היכן הייתה דגימה 24 כעבור שבוע?","expected_answers":["בארון נעול."]}
+{"id":"cur26-task-c08-l07","source_ids":["cur26-c08-l07"],"split":"validation","kind":"qa","question":"האם ידוע איזו שכבה הייתה מעל השנייה?","expected_answers":["לא. המקורות סותרים וחסר כיוון הצילום."]}
+{"id":"cur26-task-c08-l09","source_ids":["cur26-c08-l09"],"split":"validation","kind":"deduction","question":"איך מסמנים שבר שנמצא במפולת?","expected_answers":["מיקום משני."]}
+{"id":"cur26-task-c08-l11","source_ids":["cur26-c08-l11"],"split":"validation","kind":"planning","question":"מה צריך לפתור לפני הצגת חתך מסכם?","expected_answers":["את סתירת כיווני הצילום, לצד אימות נקודות הציון וסימון אזורים חסרים."]}
+{"id":"cur26-task-c08-l13","source_ids":["cur26-c08-l13"],"split":"validation","kind":"revision","question":"מדוע תוקן הכלל לגבי אבנים כהות?","expected_answers":["נמצאה אבן כהה שהגיעה משכבה אחרת."]}
+{"id":"cur26-task-c08-l14","source_ids":["cur26-c08-l14"],"split":"validation","kind":"self_check","question":"האם שלוש מדידות בדרום מוכיחות גבול ישר בכל הגבעה?","expected_answers":["לא."]}
+{"id":"cur26-task-c09-l03","source_ids":["cur26-c09-l03"],"split":"test","kind":"entity_tracking","question":"לאיזו 'עמדה 4' כיוון הקובץ?","expected_answers":["לנקודת הניווט האווירית."]}
+{"id":"cur26-task-c09-l04","source_ids":["cur26-c09-l04"],"split":"test","kind":"deduction","question":"האם ניתן היה לשגר את הרחפן הגדול לאחר הכישלון בבדיקה?","expected_answers":["לא."]}
+{"id":"cur26-task-c09-l06","source_ids":["cur26-c09-l06"],"split":"test","kind":"entity_tracking","question":"לפי איזה מסלול נערכה הטיסה ביום שלישי?","expected_answers":["לפי המסלול של יום שני."]}
+{"id":"cur26-task-c09-l07","source_ids":["cur26-c09-l07"],"split":"test","kind":"qa","question":"האם פער בין השעונים מוכיח המשך טיסה אחרי הנחיתה?","expected_answers":["לא."]}
+{"id":"cur26-task-c09-l09","source_ids":["cur26-c09-l09"],"split":"test","kind":"deduction","question":"מהי חלופת החירום כאשר מסלול החזרה חסום?","expected_answers":["נחיתה באזור מאושר לפי התוכנית."]}
+{"id":"cur26-task-c09-l11","source_ids":["cur26-c09-l11"],"split":"test","kind":"planning","question":"מה נדרש לפני המראה מבוקרת?","expected_answers":["אישור המסלול, אזורי האיסור, הסוללה והקשר."]}
+{"id":"cur26-task-c09-l13","source_ids":["cur26-c09-l13"],"split":"test","kind":"revision","question":"איזה גורם נוסף נמצא לאובדן קשר?","expected_answers":["מקור הפרעה סמוך."]}
+{"id":"cur26-task-c09-l14","source_ids":["cur26-c09-l14"],"split":"test","kind":"self_check","question":"האם בדיקה ברוח שקטה מבטיחה חזרה בכל תנאי?","expected_answers":["לא."]}
+{"id":"cur26-task-c10-l03","source_ids":["cur26-c10-l03"],"split":"test","kind":"entity_tracking","question":"איזו בקשת 'אולם קריאה' אושרה?","expected_answers":["בקשת הנגשת הכניסה."]}
+{"id":"cur26-task-c10-l04","source_ids":["cur26-c10-l04"],"split":"test","kind":"deduction","question":"האם אפשר לאשר את התאורה במסלול הרגיל בלבד?","expected_answers":["לא."]}
+{"id":"cur26-task-c10-l06","source_ids":["cur26-c10-l06"],"split":"test","kind":"entity_tracking","question":"האם ההזמנה למדפים כבר נשלחה ביום חמישי?","expected_answers":["לא."]}
+{"id":"cur26-task-c10-l07","source_ids":["cur26-c10-l07"],"split":"test","kind":"qa","question":"האם ההנחה של עשרה אחוזים ודאית?","expected_answers":["לא. היא תלויה בכמות ההזמנה."]}
+{"id":"cur26-task-c10-l09","source_ids":["cur26-c10-l09"],"split":"test","kind":"deduction","question":"האם טיפול בטיחות במסלול מהיר פטור מרישום?","expected_answers":["לא."]}
+{"id":"cur26-task-c10-l11","source_ids":["cur26-c10-l11"],"split":"test","kind":"planning","question":"מה יש לוודא לפני אישור שיפור הגישה?","expected_answers":["תקן מתאים, השוואת שתי הצעות מחיר וזמינות תקציב."]}
+{"id":"cur26-task-c10-l13","source_ids":["cur26-c10-l13"],"split":"test","kind":"revision","question":"מה שינה את דירוג פרויקט המדפים?","expected_answers":["הוספת עלות ההובלה לחישוב."]}
+{"id":"cur26-task-c10-l14","source_ids":["cur26-c10-l14"],"split":"test","kind":"self_check","question":"האם אומדנים מוכיחים כמה כסף כבר שולם בפועל?","expected_answers":["לא."]}
