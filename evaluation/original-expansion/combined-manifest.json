@@ -1,0 +1,64 @@
+{
+  "batch": "original-expansion-20261108",
+  "new_documents": 700,
+  "new_tasks": 640,
+  "source_worlds": 50,
+  "document_counts_per_level": {
+    "1": 50,
+    "2": 50,
+    "3": 50,
+    "4": 50,
+    "5": 50,
+    "6": 50,
+    "7": 50,
+    "8": 50,
+    "9": 50,
+    "10": 50,
+    "11": 50,
+    "12": 50,
+    "13": 50,
+    "14": 50
+  },
+  "task_counts_per_level": {
+    "1": 40,
+    "2": 40,
+    "3": 50,
+    "4": 50,
+    "5": 40,
+    "6": 50,
+    "7": 50,
+    "8": 40,
+    "9": 50,
+    "10": 40,
+    "11": 50,
+    "12": 40,
+    "13": 50,
+    "14": 50
+  },
+  "document_splits": {
+    "train": 420,
+    "validation": 140,
+    "test": 140
+  },
+  "task_splits": {
+    "train": 384,
+    "validation": 128,
+    "test": 128
+  },
+  "construction": {
+    "structured_realization": {
+      "documents": 560,
+      "tasks": 560,
+      "worlds": 40,
+      "mechanism_families": 10
+    },
+    "free_written": {
+      "documents": 140,
+      "tasks": 80,
+      "worlds": 10
+    }
+  },
+  "provenance": "original synthetic Hebrew, CC0-1.0",
+  "quality": "schema and CI checked, 56 structured texts sample-reviewed; full independent audit pending",
+  "evaluation_export": "default messages export hides validation and test targets"
+}

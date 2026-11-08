@@ -54,7 +54,7 @@ class DatasetTests(unittest.TestCase):
     def test_long_context_has_three_documents(self):
         long_docs = [d for d in self.docs if d['level'] == 6]
         for split in ('train','validation','test'):
-            self.assertEqual(3, len([d for d in long_docs if d['split'] == split]))
+            self.assertEqual(3, len([d for d in long_docs if d['split'] == split and d['id'].startswith('he-l06-')]))
 
 if __name__ == '__main__':
     unittest.main()
