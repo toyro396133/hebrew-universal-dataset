@@ -1,0 +1,48 @@
+{
+  "batch": "original-expansion-20261108",
+  "license": "CC0-1.0",
+  "counts": {
+    "documents": 560,
+    "tasks": 560,
+    "worlds": 40,
+    "splits": {
+      "train": 336,
+      "validation": 112,
+      "test": 112
+    },
+    "byLevel": [
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40,
+      40
+    ],
+    "uniqueTexts": 560,
+    "nonNFC": 0,
+    "invalidLinks": 0
+  },
+  "source": "40 authored world scenario specifications",
+  "method": "deterministic prose realization from scenario state; not independent human writing per document",
+  "quality_status": "syntactic and reference checks; human linguistic review pending",
+  "family_split": {
+    "hydrology": "train",
+    "archives": "train",
+    "scheduling": "train",
+    "computing": "train",
+    "ecology": "train",
+    "materials": "train",
+    "commerce": "validation",
+    "mapping": "validation",
+    "coordination": "test",
+    "transport": "test"
+  }
+}
