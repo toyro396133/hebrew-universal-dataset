@@ -30,3 +30,14 @@ jobs:
         run: |
           python scripts/ingest_corpus.py --fixture tests/fixtures/wiki-rows.jsonl --limit 10 --output-dir /tmp/hu-stage-smoke
           python scripts/audit_staging.py /tmp/hu-stage-smoke
+      - name: Prepare blind review fixture without publishing its text
+        run: |
+          python scripts/review_calibration.py prepare --stage-dir /tmp/hu-stage-smoke --output-dir /tmp/hu-blind-review --count 5 --seed 17
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('/tmp/hu-blind-review/blind-review-packet.jsonl')
+          rows=[json.loads(x) for x in p.read_text(encoding='utf-8').splitlines()]
+          assert len(rows)==5 and all(set(row)=={'id','text'} for row in rows)
+          print('Blind review fixture created; no external text uploaded.')
+          PY
